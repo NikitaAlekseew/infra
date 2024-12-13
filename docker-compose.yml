@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   traefik:
@@ -36,16 +36,15 @@ services:
       - web
     restart: unless-stopped
 
-  # ui:
-  #   image: ghcr.io/da-maltsev/test-ui:latest
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.ui.rule=PathPrefix(`/`)"
-  #     - "traefik.http.services.ui.loadbalancer.server.port=3000"
-  #     - "traefik.http.routers.api.tls.certresolver=myresolver"
-  #   networks:
-  #     - web
-  #   restart: unless-stopped
+  ui:
+    image: ghcr.io/da-maltsev/test-ui:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`test.da-maltsev.ru`) && PathPrefix(`/`)"
+      - "traefik.http.services.ui.loadbalancer.server.port=3000"
+    networks:
+      - web
+    restart: unless-stopped
 
 networks:
   web:

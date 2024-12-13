@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.tls.certresolver=myresolver"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=da-maltsev@inbox.ru"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "letsencrypt:/letsencrypt"
+    networks:
+      - web
+    restart: unless-stopped
+
+  api:
+    image: ghcr.io/da-maltsev/test-api:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=PathPrefix(`/api`)"
+      - "traefik.http.services.api.loadbalancer.server.port=8000"
+    networks:
+      - web
+    restart: unless-stopped
+
+  # ui:
+  #   image: ghcr.io/da-maltsev/test-ui:latest
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.ui.rule=PathPrefix(`/`)"
+  #     - "traefik.http.services.ui.loadbalancer.server.port=3000"
+  #   networks:
+  #     - web
+  #   restart: unless-stopped
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  letsencrypt:

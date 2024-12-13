@@ -18,6 +18,7 @@ services:
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
       - "--log.level=DEBUG"
       - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--providers.docker.defaultRule=Host(`test.da-maltsev.ru`)"
     ports:
       - "80:80"
       - "443:443"

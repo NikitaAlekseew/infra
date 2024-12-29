@@ -1,7 +1,7 @@
 # Используем официальный Node.js образ
 FROM node:18
 
-WORKDIR /app
+WORKDIR /appServer
 
 # Копируем package.json и package-lock.json
 COPY package*.json ./

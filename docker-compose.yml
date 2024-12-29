@@ -29,6 +29,7 @@ services:
   api:
     build:
       context: ./server
+      dockerfile: Dockerfile
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`alexeev.tech`) && PathPrefix(`/api`)"
@@ -40,6 +41,7 @@ services:
   ui:
     build:
       context: ./client
+      dockerfile: Dockerfile
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ui.rule=Host(`alexeev.tech`) && PathPrefix(`/`)"

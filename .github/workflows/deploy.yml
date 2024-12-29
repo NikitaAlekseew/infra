@@ -13,4 +13,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: cd infra && git pull && docker compose pull && docker compose up -d
+          script: cd infra && git pull && docker compose pull && docker compose up -d --build

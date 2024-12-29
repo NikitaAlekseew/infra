@@ -33,6 +33,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`alexeev.tech`) && PathPrefix(`/api`)"
+      - "traefik.http.middlewares.api-strip-prefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.api.middlewares=api-strip-prefix"
       - "traefik.http.services.api.loadbalancer.server.port=3000"
     networks:
       - web

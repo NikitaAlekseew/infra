@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, ReactNode, useEffect, useState, Dispatch, SetStateAction} from "react";
+import { createContext, ReactNode, useEffect, useState} from "react";
 
 
 type AuthContextType = {

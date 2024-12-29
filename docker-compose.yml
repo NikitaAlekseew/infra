@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
 
   api:
-    image: ./server/docker
+    image: ./server
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`alexeev.tech`) && PathPrefix(`/api`)"
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
 
   ui:
-    image: ./client/docker
+    image: ./client
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ui.rule=Host(`alexeev.tech`) && PathPrefix(`/`)"

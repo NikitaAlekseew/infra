@@ -22,7 +22,7 @@ RUN ls -al /app
 FROM nginx:alpine
 
 # Копируем собранные файлы из первого этапа
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Открываем порт 80
 EXPOSE 80

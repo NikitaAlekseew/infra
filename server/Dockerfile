@@ -16,3 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Запускаем сервер
+RUN npm run start

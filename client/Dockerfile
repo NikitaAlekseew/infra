@@ -15,6 +15,9 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
+RUN ls -al /app
+
+
 # Используем Nginx для сервировки статических файлов
 FROM nginx:alpine
 

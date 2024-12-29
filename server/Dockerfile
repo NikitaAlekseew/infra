@@ -16,5 +16,3 @@ COPY . .
 EXPOSE 3000
 
 # Запускаем сервер
-CMD ["sh", "-c", "npm run start"]
-
